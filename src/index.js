@@ -9,4 +9,45 @@ library.add(fas, far, fab)
 
 dom.i2svg() 
 
-console.log('hello world')
+
+
+
+
+const btn = document.getElementById('btn')
+
+btn.addEventListener('click', () => {
+    getPerson(getData)
+})
+
+
+const getPerson =  (cb) => {
+    const url = `https://randomuser.me/api/`
+    const ajax = new XMLHttpRequest()
+
+    ajax.open('GET', url, true)
+
+    ajax.onload = function() {
+        if(this.status === 200) {
+            cb(this.response, showData)
+        } else {
+            this.onerror()
+        }
+    }
+
+    ajax.send()
+
+    ajax.onerror = () => { console.log("There was an error"); }
+}
+
+
+const getData = (response, cb) => {
+    const data = JSON.parse(response)
+
+    const { name: {first}, name: {last}, picture: {large}, location: {street}, phone, email } = data.results[0]
+
+    cb(first, last, large, location, street, email)
+}
+
+const showData = (first, last, large, location, street, email) => {
+    console.log(data)
+}
