@@ -17,6 +17,7 @@ const btn = document.getElementById('btn')
 
 btn.addEventListener('click', () => {
     getPerson(getData)
+    
 })
 
 
@@ -45,9 +46,15 @@ const getData = (response, cb) => {
 
     const { name: {first}, name: {last}, picture: {large}, location: {street}, phone, email } = data.results[0]
 
-    cb(first, last, large, location, street, email)
+    cb(first, last, large, street, phone, email)
 }
 
-const showData = (first, last, large, location, street, email) => {
-    console.log(data)
+const showData = (first, last, large, street, phone, email) => {
+
+    document.getElementById('first').textContent = first;
+    document.getElementById('last').textContent = last;
+    document.getElementById('street').textContent = street.number + "  " + street.name;
+    document.getElementById('phone').textContent = phone;
+    document.getElementById('email').textContent = email;
+    document.getElementById('photo').src = large;
 }
